@@ -11,20 +11,20 @@
 
             string dataFile = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "data.txt");
 
-            using (StreamReader reader = new(dataFile))
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine() ?? string.Empty;
+            using StreamReader reader = new(dataFile);
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine() ?? string.Empty;
 
-                    if (line == string.Empty)
-                    {
-                        data.Add(-1);
-                    }
-                    else
-                    {
-                        data.Add(int.Parse(line));
-                    }
+                if (line == string.Empty)
+                {
+                    data.Add(-1);
                 }
+                else
+                {
+                    data.Add(int.Parse(line));
+                }
+            }
             
             foreach (int d in data)
             {
