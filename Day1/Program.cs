@@ -1,4 +1,4 @@
-﻿using Lib;
+﻿using System.Reflection;
 
 namespace Day1
 {
@@ -6,27 +6,44 @@ namespace Day1
     {
         private static void Main()
         {
-            int max = 0, sum = 0;
-            string input = StdInp.Input("Enter the number of calories each ration pack contains\nWhen starting with a new elf leave blank line");
-            List<int> calories = new List<int>();
+            int sum = 0;
+            Console.WriteLine("Day1\n");
+            List<int> data = new();
+            List<int> calories = new();
+            
+            string DATAFILE = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "data.txt");
 
-            while (Convert.ToInt32(input) != -1)
+            using (StreamReader reader = new(DATAFILE))
             {
-                if (input == string.Empty)
+                while (!reader.EndOfStream)
                 {
-                    calories.Add(-1);
+                    string line = reader.ReadLine() ?? string.Empty;
+
+                    if (line == string.Empty)
+                    {
+                        data.Add(-1);
+                    }
+                    else
+                    {
+                        data.Add(int.Parse(line));
+                    }
+                }
+            }
+
+            foreach (int d in data)
+            {
+                if (d == -1)
+                {
+                    calories.Add(sum);
                     sum = 0;
                 }
                 else
                 {
-                    calories.Add(Convert.ToInt32(input));
-                    sum += Convert.ToInt32(input);
+                    sum += d;
                 }
             }
 
-            foreach (int i in calories)
-            { Console.WriteLine(i); }
-
+            Console.WriteLine($"The elf with the highest calorie count has a count of {calories.Max()}");
         }
     }
 }
