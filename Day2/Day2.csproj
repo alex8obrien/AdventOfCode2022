@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Lib\Lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="CommonsLibrary">
       <HintPath>..\lib\CommonsLibrary.dll</HintPath>
     </Reference>
